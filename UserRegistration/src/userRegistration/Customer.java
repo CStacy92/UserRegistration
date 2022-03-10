@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Customer {
 	private String fName;
 	private String lname;
-	private String phoneNumber;
+	private int phoneNumber;
 	private String email;
 	private String userName;
 	private int age;
@@ -57,12 +57,13 @@ public class Customer {
 			setLname(s.nextLine());
 			s.close();}
 	}
-	public String getPhoneNumber() {
+	public int getPhoneNumber() {
 		return phoneNumber;
 	}
+	//FIX ME: Throws unlisted IllegalArgumentException
 	public void setPhoneNumber(String phoneNumber) {
 		try {
-		if(!phoneNumber.matches("[0-9]")) {
+		if(!phoneNumber.matches("[0-9]+")) {
 			throw new IllegalArgumentException("Phone number can only contain numerals!");
 		}
 		if(phoneNumber.length() > 10) {
@@ -71,7 +72,7 @@ public class Customer {
 		if (phoneNumber.isBlank()) {
 			throw new IllegalArgumentException("Phone number can not be blank!");
 		}
-		this.phoneNumber = phoneNumber;}
+		this.phoneNumber = Integer.valueOf(phoneNumber);}
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			System.out.println("Enter Customer Phone Number: ");
