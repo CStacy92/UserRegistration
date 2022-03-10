@@ -48,15 +48,53 @@ public class FrontEndUI {
 			System.out.println("\nEnter number for desired action: ");
 			selection = s.nextInt();
 			s.nextLine();
-			Customer x;
+			Customer x = new Customer();
 			
 			//finds customer in customers
+			//CHECK IF CUSTOMER EXISTS AND PRODUCE ERROR IF NOT IN CUSTOMERS
 			for(Customer cstmr : CustomerDAO.getCustomers()) {
 				if ((cstmr.getfName() == first) && (cstmr.getLname() == last)) {
 					x = cstmr;
 				}
 			}
-			//CREATE SWITCH STATEMENT FOR SELECTION AND ACTIONS
+
+			switch(selection) {
+			case(1):
+				System.out.println("Enter new first name: ");
+				first = s.nextLine();
+				x.setfName(first);
+				System.out.println("Customer first name changed to " + x.getfName());
+				break;
+			case(2):
+				System.out.println("Enter new last name: ");
+				last = s.nextLine();
+				x.setLname(last);
+				System.out.println("Customer last name changed to " + x.getLname());
+				break;
+			case(3):
+				System.out.println("Enter new age: ");
+				int newAge = s.nextInt();
+				x.setAge(newAge);
+				System.out.println("Customer last name changed to " + x.getLname());
+				break;
+			case(4):
+				System.out.println("Enter new email: ");
+				String newEmail = s.nextLine();
+				x.setEmail(newEmail);
+				System.out.println("Customer email changed to " + x.getEmail());
+			case(5):
+				System.out.println("Enter new phone number: ");
+				String newPhone = s.nextLine();
+				x.setPhoneNumber(newPhone);
+				System.out.println("Customer phone number changed to " + x.getPhoneNumber());
+				break;
+			case(6):
+				System.out.println("Enter new username: ");
+				String newUser = s.nextLine();
+				x.setUserName(newUser);
+				System.out.println("Customer username changed to: " + x.getUserName());
+				break;
+			}
 			break;
 			
 		case(3):
