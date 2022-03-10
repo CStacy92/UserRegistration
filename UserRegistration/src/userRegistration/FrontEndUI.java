@@ -51,11 +51,14 @@ public class FrontEndUI {
 			Customer x = new Customer();
 			
 			//finds customer in customers
-			//CHECK IF CUSTOMER EXISTS AND PRODUCE ERROR IF NOT IN CUSTOMERS
+			if (CustomerDAO.isCustomer(first, last)) {
 			for(Customer cstmr : CustomerDAO.getCustomers()) {
 				if ((cstmr.getfName() == first) && (cstmr.getLname() == last)) {
 					x = cstmr;
 				}
+			}}
+			else {System.out.println("Customer " + first + " " + last + " is not a current customer");
+			break;
 			}
 
 			switch(selection) {
