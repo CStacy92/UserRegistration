@@ -39,14 +39,14 @@ public class Customer {
 	}
 	public void setLname(String lname) {
 		try {
-		if(fName.length() > 24) {
-			throw new IllegalArgumentException("Customer first name should be fewer than 24 characters!");
+		if(lname.length() > 24) {
+			throw new IllegalArgumentException("Customer last name should be fewer than 24 characters!");
 		}
-		if(!fName.matches("[a-zA-Z]+")) {
-			throw new IllegalArgumentException("Customer first name can only contain letters!");
+		if(!lname.matches("[a-zA-Z]+")) {
+			throw new IllegalArgumentException("Customer last name can only contain letters!");
 		}
-		if(fName.isBlank()) {
-			throw new IllegalArgumentException("Customer first name cannot be empty!");
+		if(lname.isBlank()) {
+			throw new IllegalArgumentException("Customer last name cannot be empty!");
 		}
 		
 		this.lname = lname;}

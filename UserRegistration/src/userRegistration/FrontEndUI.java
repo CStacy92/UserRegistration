@@ -1,6 +1,4 @@
 package userRegistration;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FrontEndUI {
