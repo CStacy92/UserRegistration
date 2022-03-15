@@ -91,7 +91,7 @@ public class Customer {
 	}
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			System.out.println("Enter Customer Last Name: ");
+			System.out.println("Enter Customer Email: ");
 			Scanner s = new Scanner(System.in);
 			setEmail(s.nextLine());
 			s.close();}}
@@ -101,7 +101,7 @@ public class Customer {
 	public void setUserName(String userName) {
 		try {
 		if(userName.length() < 8 || userName.length() > 24 || userName.isBlank()) {
-			throw new IllegalArgumentException("Invalid username!");
+			throw new IllegalArgumentException("Invalid username! Must be between 8 and 24 characters");
 		}
 		this.userName = userName;}
 		catch(IllegalArgumentException e) {

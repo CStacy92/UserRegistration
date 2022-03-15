@@ -1,5 +1,6 @@
 package userRegistration;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class CustomerDAO {
 
 	// Add customer to customer list
 	public static void addCustomer(Customer c) {
-		customers.add(c);
+		DatabaseConnection.addCustomer(c.getfName(), c.getLname(), c.getAge(), c.getPhoneNumber(), c.getEmail(), c.getUserName());
 	}
 
 	// Update customer info

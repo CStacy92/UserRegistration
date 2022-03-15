@@ -31,16 +31,14 @@ public class FrontEndUI {
 			c.setPhoneNumber(s.nextLine());
 			System.out.println("Enter Customer Username:");
 			c.setUserName(s.nextLine());
-			CustomerDAO.addCustomer(c);
-			System.out.println("Customer " + c.getfName() + " successfully added.");
+			DatabaseConnection.addCustomer(c.getfName(), c.getLname(), c.getAge(), c.getPhoneNumber(), c.getEmail(), c.getUserName());
+			System.out.println("Customer successfully added.");
 			break;
 			
 		case(2):
 			//update customer information
-			System.out.print("Who's information would you like to update? \n Enter customer first name: ");
-			String first = s.nextLine();
-			System.out.print("\nEnter customer last name: ");
-			String last = s.nextLine();
+			System.out.print("Who's information would you like to update? \n Enter customer username: ");
+			String user = s.nextLine();
 			System.out.println("What would you like to update?");
 			System.out.println("1. First Name \n2. Last Name \n3. Age \n4. Email \n5. Phone Number \n6. Username");
 			System.out.println("\nEnter number for desired action: ");
@@ -48,79 +46,57 @@ public class FrontEndUI {
 			s.nextLine();
 			Customer x = new Customer();
 			
-			//finds customer in customers
-			if (CustomerDAO.isCustomer(first, last)) {
-			for(Customer cstmr : CustomerDAO.getCustomers()) {
-				if ((cstmr.getfName() == first) && (cstmr.getLname() == last)) {
-					x = cstmr;
-				}
-			}}
-			else {System.out.println("Customer " + first + " " + last + " is not a current customer");
-			break;
-			}
 
 			switch(selection) {
 			case(1):
 				System.out.println("Enter new first name: ");
-				first = s.nextLine();
-				x.setfName(first);
-				System.out.println("Customer first name changed to " + x.getfName());
+				String first = s.nextLine();
+				DatabaseConnection.updateFname(user, first);
+				System.out.println("Customer first name changed");
 				break;
 			case(2):
 				System.out.println("Enter new last name: ");
-				last = s.nextLine();
-				x.setLname(last);
-				System.out.println("Customer last name changed to " + x.getLname());
+				String last = s.nextLine();
+				DatabaseConnection.updateLname(user, last);
+				System.out.println("Customer last name changed");
 				break;
 			case(3):
 				System.out.println("Enter new age: ");
 				int newAge = s.nextInt();
-				x.setAge(newAge);
-				System.out.println("Customer last name changed to " + x.getLname());
+				DatabaseConnection.updateAge(user, newAge);
+				System.out.println("Customer age changed");
 				break;
 			case(4):
 				System.out.println("Enter new email: ");
 				String newEmail = s.nextLine();
-				x.setEmail(newEmail);
-				System.out.println("Customer email changed to " + x.getEmail());
+				DatabaseConnection.updateEmail(user, newEmail);
+				System.out.println("Customer email changed");
+				break;
 			case(5):
 				System.out.println("Enter new phone number: ");
 				String newPhone = s.nextLine();
-				x.setPhoneNumber(newPhone);
-				System.out.println("Customer phone number changed to " + x.getPhoneNumber());
+				DatabaseConnection.updatePhoneNumber(user, newPhone);
+				System.out.println("Customer phone number changed");
 				break;
 			case(6):
 				System.out.println("Enter new username: ");
 				String newUser = s.nextLine();
-				x.setUserName(newUser);
-				System.out.println("Customer username changed to: " + x.getUserName());
+				DatabaseConnection.updateUsername(user, newUser);
+				System.out.println("Customer username changed");
 				break;
 			}
 			break;
 			
 		case(3):
-			//ADD UNIQUE IDENTIFIER FOR CUSTOMERS: NEED KEY TO DIFFERENTIATE USERS WITH SAME NAME
-			System.out.print("What customer would you like to delete? \n Enter customer first name: ");
-			String f = s.nextLine();
-			System.out.print("\nEnter customer last name: ");
-			String l = s.nextLine();
-			
-			for(Customer cstmr : CustomerDAO.getCustomers()) {
-				if ((cstmr.getfName() == f) && (cstmr.getLname() == l)) {
-					CustomerDAO.deleteCustomer(cstmr);
-				}
-			}
+			System.out.print("What customer would you like to delete? \n Enter Customer Username: ");
+			 user = s.nextLine();
+			 DatabaseConnection.deleteUser(user);
 			System.out.println("Customer deleted");
 			break;
 			
 		case(4):
 			//display all customers
-			for(Customer cstmr : CustomerDAO.getCustomers()) {
-				System.out.println("Customer Name: " + cstmr.getfName() + " " + cstmr.getLname());
-				System.out.println("Username: " + cstmr.getUserName());
-				System.out.println("Customer Age:" + cstmr.getAge());
-				System.out.println("Contact Information: " + cstmr.getEmail() + "\n" + cstmr.getPhoneNumber() + "\n\n" );
-			}
+			DatabaseConnection.showAll();
 			break;
 			
 		default: System.out.println("Not a valid selection: Enter 1,2,3, or 4");
@@ -128,7 +104,7 @@ public class FrontEndUI {
 		
 		//asks to quit or continue with other actions
 		System.out.println("Would you like to do something else?");
-		System.out.println("Press any number 1-9 to continue or 0 to quit");
+		System.out.println("Press any number 1-9 to continue or 0 to quit:");
 		selection = s.nextInt();
 		s.nextLine();
 		
